@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+    http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.scijava</groupId>
+    <artifactId>pom-scijava</artifactId>
+    <version>17.1.1</version>
+    <relativePath />
+  </parent>
+
+  <groupId>Transform_Files</groupId>
+  <artifactId>DeepZ_transform_main</artifactId>
+  <version>2.0.0</version>
+
+  <name>DeepZ Transform Train</name>
+  <description>plugin for DeepZ transform train</description>
+  <url>https://github.com/zestt</url>
+  <inceptionYear>2017</inceptionYear>
+
+  <developers>
+	<developer>
+		<name>Ronald Gao</name>
+		<url>http://imagej.net/User:Ronaldg</url>
+		<roles>
+			<role>lead</role>
+			<role>debugger</role>
+			<role>reviewer</role>
+			<role>support</role>
+			<role>maintainer</role>
+		</roles>
+	</developer>
+  </developers>
+  <properties>
+  	<package-name>Transform_Files</package-name>
+    <enforcer.skip>true</enforcer.skip>
+    <exec.mainClass>Transform_Files.DeepZ_transform_main</exec.mainClass>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>imagej.public</id>
+      <url>http://maven.imagej.net/content/groups/public</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <!-- ImageJ Dependencies -->
+    <dependency>
+        <groupId>org.tensorflow</groupId>
+        <artifactId>tensorflow</artifactId>
+        <version>1.12.0</version> 
+    </dependency>
+    <dependency>
+      <groupId>net.imagej</groupId>
+      <artifactId>imagej</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.imglib2</groupId>
+      <artifactId>imglib2-ij</artifactId>
+      <version>2.0.0-beta-38</version>
+    </dependency>
+    <dependency>
+      <groupId>net.imagej</groupId>
+      <artifactId>imagej-tensorflow</artifactId>
+      <version>1.1.4</version>
+    </dependency>
+	<dependency>
+	  <groupId>org.tensorflow</groupId>
+	  <artifactId>proto</artifactId>
+	</dependency>
+    <!-- Fiji Dependencies -->
+    <dependency>
+        <groupId>sc.fiji</groupId>
+        <artifactId>fiji-lib</artifactId>
+    </dependency>
+  </dependencies>
+
+  <!-- <build>
+		<plugins>
+			<plugin>
+			    <artifactId>maven-compiler-plugin</artifactId>
+			    <configuration>
+			        <compilerArgument>-Xlint:all</compilerArgument>
+			    </configuration>
+			</plugin>
+		</plugins>
+	</build> -->
+
+  
+</project>
