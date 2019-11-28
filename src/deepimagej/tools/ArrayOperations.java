@@ -43,51 +43,7 @@ import ij.process.ImageProcessor;
 
 public class ArrayOperations {
 
-	public static ImagePlus convertArrayToImagePlus(double[][][][][] array, int[] shape) {
-		int nx = shape[0];
-		int ny = shape[1];
-		int nz = shape[3];
-		int nc = shape[2];
-		int nt = shape[4];
-		ImagePlus imp = IJ.createImage("out", "32-bit", nx, ny, nc, nz, nt);
-		for (int t = 0; t < nt; t++) {
-			for (int c = 0; c < nc; c++) {
-				for (int z = 0; z < nz; z++) {
-					imp.setPositionWithoutUpdate(c + 1, z + 1, t + 1);
-					ImageProcessor ip = imp.getProcessor();
-					for (int x = 0; x < nx; x++)
-						for (int y = 0; y < ny; y++)
-							ip.putPixelValue(x, y, array[x][y][c][z][t]);
-				}
-			}
-		}
-		return imp;
-	}
 
-	public static double[][] iProcessor2matrix(ImageProcessor image) {
-		// this method transforms an image processor into a matrix
-		double pixelVal = 0;
-		int ySize = image.getHeight();
-		int xSize = image.getWidth();
-		double[][] matImage = new double[xSize][ySize];
-		for (int y = 0; y < ySize; y++) {
-			for (int x = 0; x < xSize; x++) {
-				pixelVal = (double) image.getPixelValue(x, y);
-				matImage[x][y] = pixelVal;
-			}
-		}
-		return matImage;
-	}
-
-	public static ImageProcessor matrix2iProcessor(double[][] matImage, int xSize, int ySize, ImageProcessor ip) {
-		// This method transforms a matrix of 2d into an image processor
-		for (int x = 0; x < xSize; x++) {
-			for (int y = 0; y < ySize; y++) {
-				ip.putPixelValue(x, y, matImage[x][y]);
-			}
-		}
-		return ip;
-	}
 
 	public static ImagePlus extractPatch(ImagePlus image, int sPatch, int xStart, int yStart,
 										int overlapX, int overlapY, int channels) {
@@ -117,20 +73,6 @@ public class ArrayOperations {
 		return patchImage;
 	}
 
-	public static int findPatchSize(int minPatchMultiple, boolean fixedPatchSize) {
-		// Find the size of the patches to process the image. It will
-		// be around the defined constant 'approx_size'
-		int patchSize;
-		int estimatedSize = 200;
-		if (minPatchMultiple > estimatedSize || fixedPatchSize == true) {
-			patchSize = minPatchMultiple;
-		}
-		else {
-			int n_patches = estimatedSize / minPatchMultiple;
-			patchSize = (n_patches + 1) * minPatchMultiple;
-		}
-		return patchSize;
-	}
 
 	public static void imagePlusReconstructor(ImagePlus fImage, ImagePlus patch,
 											   int xImageStartPatch, int xImageEndPatch,
@@ -242,31 +184,6 @@ public class ArrayOperations {
 		while (counter < array.length && found == false) {
 			arrayPos = array[counter];
 			if (arrayPos.equals(element) == true) {
-				found = true;
-				index = counter;
-			}
-			counter++;
-		}
-		return index;
-	}
-
-	/**
-	 * Finds the index of the of the first entry of the array that coincides with
-	 * the variable 'element' starting at start
-	 * 
-	 * @param array
-	 * @param element
-	 * @param start
-	 * @return index
-	 */
-	public static int indexOf(int[] array, int element, int start) {
-		boolean found = false;
-		int counter = start;
-		int index = -1;
-		int array_pos = 0;
-		while (counter <  array.length && found == false) {
-			array_pos = array[counter];
-			if (array_pos == element) {
 				found = true;
 				index = counter;
 			}

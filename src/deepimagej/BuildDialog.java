@@ -61,9 +61,6 @@ import deepimagej.stamp.TestStamp;
 import deepimagej.stamp.WelcomeStamp;
 import deepimagej.tools.Log;
 import deepimagej.tools.WebBrowser;
-import ij.IJ;
-import ij.ImagePlus;
-import ij.WindowManager;
 import ij.gui.GUI;
 
 public class BuildDialog extends JDialog implements ActionListener {
